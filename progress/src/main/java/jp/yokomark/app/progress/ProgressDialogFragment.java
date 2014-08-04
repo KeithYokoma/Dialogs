@@ -113,21 +113,36 @@ public class ProgressDialogFragment extends DialogFragment {
         return (TextView) dialog.findViewById(android.R.id.message);
     }
 
-    public static class Builder {
-        private final ProgressDialogFragment mInstance;
+    public static interface ProgressDialogFragmentFactory<D extends ProgressDialogFragment> {
+        public D newInstance();
+    }
+
+    public static class DefaultProgressDialogFragmentFactory implements ProgressDialogFragmentFactory<ProgressDialogFragment> {
+        @Override
+        public ProgressDialogFragment newInstance() {
+            return new ProgressDialogFragment();
+        }
+    }
+
+    public static abstract class Builder {
         private final Bundle mArgs;
+        private final ProgressDialogFragmentFactory<?> mFactory;
 
         public Builder() {
-            mInstance = new ProgressDialogFragment();
+            this(new DefaultProgressDialogFragmentFactory());
+        }
+
+        public Builder(ProgressDialogFragmentFactory<?> factory) {
             mArgs = new Bundle();
+            mFactory = factory;
         }
 
         public ProgressDialogFragment create() {
             validate();
-            mInstance.setArguments(mArgs);
-            return mInstance;
+            ProgressDialogFragment instance = mFactory.newInstance();
+            instance.setArguments(mArgs);
+            return instance;
         }
-
         public Builder setTitle(Context context, @StringRes int titleRes) {
             return setTitle(context.getString(titleRes));
         }
