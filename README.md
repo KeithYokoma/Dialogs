@@ -21,6 +21,8 @@ new ProgressDialog.Builder()
 
 ## Download
 
+Note that maven repository is UNDER PREPARATION.
+
 Via Gradle.
 
 ```groovy
