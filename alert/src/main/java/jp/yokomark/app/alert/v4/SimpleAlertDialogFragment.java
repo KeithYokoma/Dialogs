@@ -11,11 +11,14 @@ import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 
 /**
  * @author KeithYokoma
  */
 public class SimpleAlertDialogFragment extends DialogFragment {
+    public static final String TAG = SimpleAlertDialogFragment.class.getSimpleName();
     private static final String ARGS_ICON = "icon";
     private static final String ARGS_TITLE = "title";
     private static final String ARGS_MESSAGE = "title";
@@ -88,6 +91,14 @@ public class SimpleAlertDialogFragment extends DialogFragment {
             });
         }
         return builder.create();
+    }
+
+    public void show(FragmentManager manager) {
+        super.show(manager, TAG);
+    }
+
+    public int show(FragmentTransaction transaction) {
+        return super.show(transaction, TAG);
     }
 
     public static class Builder {

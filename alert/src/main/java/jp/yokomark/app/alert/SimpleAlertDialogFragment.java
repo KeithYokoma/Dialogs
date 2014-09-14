@@ -6,6 +6,8 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Build;
@@ -20,6 +22,7 @@ import android.support.annotation.StyleRes;
  */
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class SimpleAlertDialogFragment extends DialogFragment {
+    public static final String TAG = SimpleAlertDialogFragment.class.getSimpleName();
     private static final String ARGS_ICON = "icon";
     private static final String ARGS_TITLE = "title";
     private static final String ARGS_MESSAGE = "title";
@@ -94,6 +97,14 @@ public class SimpleAlertDialogFragment extends DialogFragment {
             });
         }
         return builder.create();
+    }
+
+    public void show(FragmentManager manager) {
+        super.show(manager, TAG);
+    }
+
+    public int show(FragmentTransaction transaction) {
+        return super.show(transaction, TAG);
     }
 
     public static class Builder {

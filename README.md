@@ -1,6 +1,6 @@
 # Dialogs
 
-Simplify your dialog fragment implementations.
+Simple dialog implementation templates.
 
 ## Usage
 
@@ -18,6 +18,16 @@ new ProgressDialog.Builder()
 ```
 
 ### AlertDialog
+
+```java
+new SimpleAlertDialogFragment.Builder()
+    .setTitle("Alert")
+    .setMessage("Hello world!")
+    .setPositiveButton("OK")
+    .setNegativeButton("No")
+    .create()
+    .show(getFragmentManager);
+```
 
 ## Download
 
